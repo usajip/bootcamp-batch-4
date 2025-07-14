@@ -1,58 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>My Website</title>
-        <meta name="description" content="This is a sample HTML document.">
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                margin: 20px;
-            }
-            table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-            th, td {
-                padding: 8px;
-                text-align: left;
-            }
-            th {
-                background-color: #f2f2f2;
-            }
-        </style>
-    </head>
-    <body>
-        <a href="https://www.google.com">
-            <img src="gambar/PC-Gaming_Thumbnail-2.jpeg" alt="Sample Image">
-        </a>
-        <img src="https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/8/19/d38337ab-942c-4166-8162-9b71544ca993.jpg.webp?ect=4g" alt="Sample Image">
-        
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Nomor</th>
-                    <th>Judul</th>
-                    <th>Harga</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Belajar HTML</td>
-                    <td>Rp 50.000</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Panduan CSS</td>
-                    <td>Rp 75.000</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>JavaScript Dasar</td>
-                    <td>Rp 100.000</td>
-                </tr>
-            </tbody>
-        </table>
-    </body>
+<html>
+<head>
+    <title>Halaman Profil Biodata</title>
+</head>
+<body>
+
+    <!-- Section 1: Menu -->
+    <table border="1" width="100%">
+        <tr>
+            <td align="center"><b>Beranda</b></td>
+            <td align="center"><b>Tentang</b></td>
+            <td align="center"><b>Portofolio</b></td>
+            <td align="center"><b>Kontak</b></td>
+        </tr>
+    </table>
+
+    <!-- Section 2: Header dengan teks dan gambar -->
+    <table border="0" width="100%" style="margin-top: 20px;">
+        <tr>
+            <td width="50%">
+                <h1>Selamat Datang di Profil Saya</h1>
+                <p>Saya adalah seorang web developer yang bersemangat dalam membangun solusi digital.</p>
+                <button>Lihat Selengkapnya</button>
+            </td>
+            <td width="50%" align="center">
+                <img src="gambar/PC-Gaming_Thumbnail-2.jpeg" width="250" alt="Foto Profil">
+            </td>
+        </tr>
+    </table>
+
+    <!-- Section 3: Biodata -->
+    <h2 align="center">Biodata</h2>
+    <table border="1" width="100%">
+        <tr>
+            <td width="33%" align="center"><b>Nama Lengkap</b><br>John Doe</td>
+            <td width="33%" align="center"><b>Pendidikan</b><br>S1 Teknik Informatika</td>
+            <td width="33%" align="center"><b>Pekerjaan</b><br>Web Developer</td>
+        </tr>
+        <tr>
+            <td width="33%" align="center"><b>Kontak</b><br>johndoe@email.com</td>
+            <td width="33%" align="center"><b>Hobi</b><br>Membaca, Coding, Bermusik</td>
+            <td width="33%" align="center"><b>Alamat</b><br>Jl. Merdeka No. 123, Jakarta</td>
+        </tr>
+    </table>
+
+    <!-- Section 4: Portofolio -->
+    <h2 align="center">Portofolio</h2>
+    <table border="1" width="100%">
+        <tr>
+            <td width="33%" align="center">
+                <img src="https://via.placeholder.com/150" alt="Project 1"><br>
+                <b>Website Toko Online</b>
+                <p>Sebuah website e-commerce untuk penjualan produk fashion.</p>
+            </td>
+            <td width="33%" align="center">
+                <img src="https://via.placeholder.com/150" alt="Project 2"><br>
+                <b>Aplikasi Manajemen Inventaris</b>
+                <p>Aplikasi untuk memonitor dan mencatat keluar masuk barang gudang.</p>
+            </td>
+            <td width="33%" align="center">
+                <img src="https://via.placeholder.com/150" alt="Project 3"><br>
+                <b>Company Profile</b>
+                <p>Website untuk profil perusahaan jasa digital marketing.</p>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>
