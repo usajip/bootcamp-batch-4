@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Halaman Profil Biodata Responsif</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#header">Profil Saya</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#header">Beranda</a></li>
+            <li class="nav-item"><a class="nav-link" href="#biodata">Tentang</a></li>
+            <li class="nav-item"><a class="nav-link" href="#portfolio">Portofolio</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Kontak</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="py-5 bg-light" id="header">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-7 mb-4 mb-lg-0">
+            <h1 class="display-4 fw-bold">
+              <span class="text-danger">Selamat</span> <span class="text-success">Datang</span> <span class="text-primary">di Profil Saya</span>
+            </h1>
+            <p class="lead mt-3">Saya adalah seorang web developer yang bersemangat dalam membangun solusi digital.</p>
+            <a href="#biodata" class="btn btn-primary btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#selengkapnya">Lihat Selengkapnya</a>
+
+            <!-- Modal -->
+            <div class="modal fade" id="selengkapnya" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+                </div>
+            </div>
+            </div>
+          </div>
+          <div class="col-lg-5 text-center">
+            <img src="gambar/profile.jpeg" class="img-fluid rounded shadow" alt="Foto Profil" style="max-width: 350px;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Biodata Section -->
+    <section class="py-5" id="biodata">
+      <div class="container">
+        <h2 class="mb-4 text-center fw-bold">Biodata</h2>
+        <div class="row g-4 justify-content-center">
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <i class="bi bi-person-badge-fill h1 text-warning"></i>
+                <h5 class="card-title">Nama Lengkap</h5>
+                <p class="card-text">John Doe</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">Pendidikan</h5>
+                <p class="card-text">S1 Teknik Informatika</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">Pekerjaan</h5>
+                <p class="card-text">Web Developer</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">Kontak</h5>
+                <p class="card-text">johndoe@email.com</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">Hobi</h5>
+                <p class="card-text">Membaca, Coding, Bermusik</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">Alamat</h5>
+                <p class="card-text">Jl. Merdeka No. 123, Jakarta</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="py-5 bg-light" id="portfolio">
+      <div class="container">
+        <h2 class="mb-4 text-center fw-bold">Portofolio</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <img src="gambar/PC-Gaming_Thumbnail-2.jpeg" class="card-img-top" alt="Project 1">
+              <div class="card-body">
+                <h5 class="card-title">Website Toko Online</h5>
+                <p class="card-text">Sebuah website e-commerce untuk penjualan produk fashion.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <img src="gambar/PC-Gaming_Thumbnail-2.jpeg" class="card-img-top" alt="Project 2">
+              <div class="card-body">
+                <h5 class="card-title">Aplikasi Manajemen Inventaris</h5>
+                <p class="card-text">Aplikasi untuk memonitor dan mencatat keluar masuk barang gudang.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <img src="gambar/PC-Gaming_Thumbnail-2.jpeg" class="card-img-top" alt="Project 3">
+              <div class="card-body">
+                <h5 class="card-title">Company Profile</h5>
+                <p class="card-text">Website untuk profil perusahaan jasa digital marketing.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Section -->
+    <section class="py-5" id="contact">
+      <div class="container">
+        <h2 class="mb-4 text-center fw-bold">Kontak</h2>
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="bg-light rounded p-4 h-100 shadow-sm">
+              <h5 class="mb-3">Info Kontak</h5>
+              <ul class="list-unstyled mb-0">
+                <li class="mb-2"><i class="bi bi-envelope-fill me-2 text-primary"></i> <b>Email:</b> johndoe@email.com</li>
+                <li class="mb-2"><i class="bi bi-telephone-fill me-2 text-success"></i> <b>Telepon:</b> +62 123 456 7890</li>
+                <li><i class="bi bi-geo-alt-fill me-2 text-danger"></i> <b>Alamat:</b> Jl. Merdeka No. 123, Jakarta</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="bg-light rounded p-4 h-100 shadow-sm">
+              <h5 class="mb-3">Form Kontak</h5>
+              <form>
+                <div class="mb-3">
+                  <label for="nama" class="form-label">Nama</label>
+                  <input type="text" class="form-control" id="nama" placeholder="Nama" required>
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Email" required>
+                </div>
+                <div class="mb-3">
+                  <label for="pesan" class="form-label">Pesan</label>
+                  <textarea class="form-control" id="pesan" placeholder="Pesan" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-3 mt-5">
+      <div class="container text-center">
+        <p class="mb-0">&copy; 2023 John Doe. All rights reserved.</p>
+      </div>
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</body>
+</html>
