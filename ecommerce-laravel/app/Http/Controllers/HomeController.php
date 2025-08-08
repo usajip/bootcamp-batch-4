@@ -12,18 +12,18 @@ class HomeController extends Controller
         $sub_title = "Find the best products at unbeatable prices!";
         $products = [
             [
-            'name' => 'Laptop',
-            'price' => 15000000,
-            'stock' => 10,
-            'image' =>'images/laptop.jpeg',
-            'description' => 'High-performance laptop suitable for work and gaming.'
+                'name' => 'Laptop',
+                'price' => 15000000,
+                'stock' => 10,
+                'image' =>'images/laptop.jpeg',
+                'description' => 'High-performance laptop suitable for work and gaming.'
             ],
             [
-            'name' => 'Smartphone',
-            'price' => 7000000,
-            'stock' => 25,
-            'image' =>'images/laptop.jpeg',
-            'description' => 'Latest smartphone with advanced features and great camera.'
+                'name' => 'Smartphone',
+                'price' => 7000000,
+                'stock' => 25,
+                'image' =>'images/laptop.jpeg',
+                'description' => 'Latest smartphone with advanced features and great camera.'
             ],
             [
             'name' => 'Headphones',
@@ -47,6 +47,9 @@ class HomeController extends Controller
             'description' => 'High-resolution monitor for crisp and clear visuals.'
             ]
         ];
-        return view('home', compact('title', 'sub_title', 'products'));
+
+        $name = 'John';
+        $age = 18;
+        return view('home', compact('title', 'sub_title', 'products', 'name', 'age'));
     }
 }

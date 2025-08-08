@@ -15,9 +15,13 @@ Route::resource('resource', 'App\Http\Controllers\ResourceController')->only([
     'index', 'store', 'update', 'destroy'
 ]);
 
+Route::get('/product/detail/kjdhaskjdhasodhaoishdlakshndklasjndlaskjdlasjk', function () {
+    return view('products.detail');
+})->name('product.detail');
+
 Route::get('/cart', function () {
-    return "Cart Details";
-});
+    return view('cart');
+})->name('cart');
 
 Route::get('/checkout', function () {
     return "Checkout Details";
