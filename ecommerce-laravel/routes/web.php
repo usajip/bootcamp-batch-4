@@ -3,11 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContohController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Contoh2Controller;
+use App\Http\Controllers\ProductController;
+use App\Models\Product;
 
 Route::get('/contoh', [ContohController::class, 'logika']);
 Route::get('/index/{a}/{b}', [ContohController::class, 'tambah']);
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/products', [ContohController::class, 'index']);
 
@@ -30,3 +33,8 @@ Route::get('/checkout', function () {
 Route::get('page-1', function(){
     return view('page-1');
 });
+
+Route::get('contoh-2', [Contoh2Controller::class, 'index']);
+
+Route::get('product-list', [ProductController::class, 'index'])
+    ->name('product.list');

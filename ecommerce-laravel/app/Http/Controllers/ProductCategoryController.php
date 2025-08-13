@@ -2,23 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ProductCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // $products = Product::all();
-        $products = Product::where('price', '>', 1000000)
-                        ->with('category')
-                        ->orderBy('id', 'desc')
-                        ->first();
-        dd($products); // Debugging line to check the products data
-        return view('products.index', compact('products'));
+        //
     }
 
     /**
@@ -40,7 +34,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show(ProductCategory $productCategory)
     {
         //
     }
@@ -48,7 +42,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit(ProductCategory $productCategory)
     {
         //
     }
@@ -56,7 +50,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, ProductCategory $productCategory)
     {
         //
     }
@@ -64,7 +58,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(ProductCategory $productCategory)
     {
         //
     }

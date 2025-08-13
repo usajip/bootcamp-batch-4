@@ -15,10 +15,29 @@
         </div>
     </div>
     <h2 id="products" class="mb-4">Popular Products</h2>
+    <div class="mb-4">
+        <form method="GET" action="{{ route('home') }}">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <select name="category" class="form-select" onchange="this.form.submit()">
+                        <option value="">All Categories</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
     <div class="row">
-        @foreach($products as $product)
+        @forelse($products as $product)
             <x-product-card :product="$product" />
-        @endforeach
+        @empty
+            <p>No products found.</p>
+        @endforelse
+        {{ $products->links() }}
     </div>
 </div>
 @push('styles')
