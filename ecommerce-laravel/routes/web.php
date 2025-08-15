@@ -5,7 +5,7 @@ use App\Http\Controllers\ContohController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Contoh2Controller;
 use App\Http\Controllers\ProductController;
-use App\Models\Product;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/contoh', [ContohController::class, 'logika']);
 Route::get('/index/{a}/{b}', [ContohController::class, 'tambah']);
@@ -38,3 +38,15 @@ Route::get('contoh-2', [Contoh2Controller::class, 'index']);
 
 Route::get('product-list', [ProductController::class, 'index'])
     ->name('product.list');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
