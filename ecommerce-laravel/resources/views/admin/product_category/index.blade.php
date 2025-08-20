@@ -13,7 +13,6 @@
                         <button onclick="openModal()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             Add New Product Category
                         </button>
-
                         <!-- Modal -->
                         <div id="categoryModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
                             <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
@@ -40,6 +39,7 @@
                                 </div>
                             </div>
                         </div>
+                        @push('scripts')
                         <script>
                             function openModal() {
                                 document.getElementById('categoryModal').classList.remove('hidden');
@@ -57,6 +57,7 @@
                                 }
                             }
                         </script>
+                        @endpush
                     </div>
 
                     <div class="overflow-x-auto">
@@ -77,10 +78,58 @@
                                         <td class="border border-gray-300 px-4 py-2">{{ $category->products_count }}</td>
                                         <td class="border border-gray-300 px-4 py-2">
                                             <div class="flex space-x-2">
-                                                <a href="{{ route('products.edit', $category->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded text-sm">
+                                                <button onclick="openEditModal({{ $category->id }}, '{{ $category->name }}')" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded text-sm">
                                                     Edit
-                                                </a>
-                                                <form action="{{ route('products.destroy', $category->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this product?')">
+                                                </button>
+                                                <!-- Edit Modal -->
+                                                <div id="editCategoryModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+                                                    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+                                                        <div class="mt-3">
+                                                            <h3 class="text-lg font-bold text-gray-900 mb-4">Edit Product Category</h3>
+                                                            <form id="editCategoryForm" method="POST">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <div class="mb-4">
+                                                                    <label for="editName" class="block text-sm font-medium text-gray-700 mb-2">Category Name</label>
+                                                                    <input type="text" id="editName" name="name" required 
+                                                                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                                                </div>
+                                                                <div class="flex justify-end space-x-2">
+                                                                    <button type="button" onclick="closeEditModal()" 
+                                                                            class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                                                                        Cancel
+                                                                    </button>
+                                                                    <button type="submit" 
+                                                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                                                        Update
+                                                                    </button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @push('scripts')
+                                                <script>
+                                                    function openEditModal(categoryId, categoryName) {
+                                                        document.getElementById('editCategoryModal').classList.remove('hidden');
+                                                        document.getElementById('editName').value = categoryName;
+                                                        document.getElementById('editCategoryForm').action = `/product-categories/${categoryId}`;
+                                                    }
+
+                                                    function closeEditModal() {
+                                                        document.getElementById('editCategoryModal').classList.add('hidden');
+                                                    }
+
+                                                    // Close edit modal when clicking outside
+                                                    window.onclick = function(event) {
+                                                        const editModal = document.getElementById('editCategoryModal');
+                                                        if (event.target == editModal) {
+                                                            closeEditModal();
+                                                        }
+                                                    }
+                                                </script>
+                                                @endpush
+                                                <form action="{{ route('product-categories.destroy', $category->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this product?')">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-sm">

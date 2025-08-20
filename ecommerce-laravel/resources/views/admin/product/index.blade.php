@@ -35,7 +35,7 @@
                                         <td class="border border-gray-300 px-4 py-2">{{ $product->id }}</td>
                                         <td class="border border-gray-300 px-4 py-2">
                                             @if($product->image)
-                                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-16 h-16 object-cover rounded">
+                                                <img src="{{ asset('images/' . $product->image) }}" alt="{{ $product->name }}" class="w-16 h-16 object-cover rounded">
                                             @else
                                                 <div class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center">
                                                     <span class="text-gray-500 text-xs">No Image</span>

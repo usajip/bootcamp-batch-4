@@ -45,6 +45,11 @@ Route::middleware('auth')->group(function () {
         Route::resource('product-categories', ProductCategoryController::class);
     });
 
+    Route::get('dashboard/{id}/{name}', [Contoh2Controller::class, 'index'])
+        ->name('dashboard.index');
+    // {{ route('dashboard.index', ['id' => 1, 'name' => 'John Doe']) }}
+    // {{ route('products.edit', ['id' => $product->id]) }}
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
