@@ -12,7 +12,9 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = ProductCategory::withCount('products')
+                        ->paginate(5);
+        return view('admin.product_category.index', compact('categories'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -12,13 +13,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        // $products = Product::all();
-        $products = Product::where('price', '>', 1000000)
-                        ->with('category')
-                        ->orderBy('id', 'desc')
-                        ->first();
-        dd($products); // Debugging line to check the products data
-        return view('products.index', compact('products'));
+        $products = Product::with('category')->paginate(5);
+        return view('admin.product.index', compact('products'));
     }
 
     /**
@@ -26,7 +22,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = ProductCategory::all();
+        return view('admin.product.create', compact('categories'));
     }
 
     /**

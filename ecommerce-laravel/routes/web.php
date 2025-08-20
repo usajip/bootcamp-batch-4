@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContohController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Contoh2Controller;
+use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 
@@ -34,16 +35,16 @@ Route::get('page-1', function(){
     return view('page-1');
 });
 
-Route::get('contoh-2', [Contoh2Controller::class, 'index']);
-
-Route::get('product-list', [ProductController::class, 'index'])
-    ->name('product.list');
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::resource('products', ProductController::class);
+        Route::resource('product-categories', ProductCategoryController::class);
+    });
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
