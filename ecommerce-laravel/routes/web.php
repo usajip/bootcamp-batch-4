@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContohController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Contoh2Controller;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -35,11 +36,10 @@ Route::get('page-1', function(){
     return view('page-1');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::prefix('admin')->group(function () {
         Route::resource('products', ProductController::class);
         Route::resource('product-categories', ProductCategoryController::class);
