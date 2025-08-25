@@ -39,14 +39,15 @@ Route::get('page-1', function(){
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::prefix('admin')->group(function () {
-        Route::resource('products', ProductController::class);
-        Route::resource('product-categories', ProductCategoryController::class);
-    });
-
-    Route::get('dashboard/{id}/{name}', [Contoh2Controller::class, 'index'])
+    Route::middleware('admin')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::prefix('admin')->group(function () {
+            Route::resource('products', ProductController::class);
+            Route::resource('product-categories', ProductCategoryController::class);
+        });
+        Route::get('dashboard/{id}/{name}', [Contoh2Controller::class, 'index'])
         ->name('dashboard.index');
+    });
     // {{ route('dashboard.index', ['id' => 1, 'name' => 'John Doe']) }}
     // {{ route('products.edit', ['id' => $product->id]) }}
 
