@@ -67,6 +67,8 @@
                                     <th class="border border-gray-300 px-4 py-2 text-left">ID</th>
                                     <th class="border border-gray-300 px-4 py-2 text-left">Name</th>
                                     <th class="border border-gray-300 px-4 py-2 text-left">Total Product</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Total Stock</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Total Price</th>
                                     <th class="border border-gray-300 px-4 py-2 text-left">Actions</th>
                                 </tr>
                             </thead>
@@ -76,6 +78,8 @@
                                         <td class="border border-gray-300 px-4 py-2">{{ $category->id }}</td>
                                         <td class="border border-gray-300 px-4 py-2 font-medium">{{ $category->name }}</td>
                                         <td class="border border-gray-300 px-4 py-2">{{ $category->products_count }}</td>
+                                        <td class="border border-gray-300 px-4 py-2">{{ $category->products_sum_stock ?? 0 }}</td>
+                                        <td class="border border-gray-300 px-4 py-2">Rp {{ number_format(($category->products_sum_price*$category->products_sum_stock ) ?? 0, 0, ',', '.') }}</td>
                                         <td class="border border-gray-300 px-4 py-2">
                                             <div class="flex space-x-2">
                                                 <button onclick="openEditModal({{ $category->id }}, '{{ $category->name }}')" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded text-sm">

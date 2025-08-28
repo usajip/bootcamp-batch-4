@@ -9,11 +9,44 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    <!-- Search Form -->
+                    <div class="mb-6">
+                        <form action="{{ route('products.index') }}" method="GET" class="flex flex-col sm:flex-row gap-4">
+                            <div class="flex-1">
+                                <input type="text" 
+                                       name="search" 
+                                       value="{{ request('search') }}" 
+                                       placeholder="Search products by name, description, or category..." 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div class="flex gap-2">
+                                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">
+                                    Search
+                                </button>
+                                @if(request('search'))
+                                    <a href="{{ route('products.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">
+                                        Clear
+                                    </a>
+                                @endif
+                            </div>
+                        </form>
+                    </div>
+
                     <div class="mb-4">
                         <a href="{{ route('products.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             Add New Product
                         </a>
                     </div>
+
+                    <!-- Search Results Info -->
+                    @if(request('search'))
+                        <div class="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                            <p class="text-blue-800">
+                                <strong>Search Results for:</strong> "{{ request('search') }}"
+                                <span class="text-blue-600">({{ $products->total() }} {{ Str::plural('result', $products->total()) }} found)</span>
+                            </p>
+                        </div>
+                    @endif
 
                     <div class="overflow-x-auto">
                         <table class="min-w-full table-auto border-collapse border border-gray-300">
@@ -64,8 +97,12 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7" class="border border-gray-300 px-4 py-8 text-center text-gray-500">
-                                            No products found.
+                                        <td colspan="8" class="border border-gray-300 px-4 py-8 text-center text-gray-500">
+                                            @if(request('search'))
+                                                No products found matching "{{ request('search') }}".
+                                            @else
+                                                No products found.
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforelse

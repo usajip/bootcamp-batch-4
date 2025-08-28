@@ -40,8 +40,8 @@ Route::get('page-1', function(){
 
 Route::middleware('auth')->group(function () {
     Route::middleware('admin')->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        Route::prefix('admin')->group(function () {
+        Route::prefix('dashboard')->group(function () {
+            Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
             Route::resource('products', ProductController::class);
             Route::resource('product-categories', ProductCategoryController::class);
         });
