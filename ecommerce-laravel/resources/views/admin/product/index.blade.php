@@ -9,6 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    @include('layouts.status_info')
                     <!-- Search Form -->
                     <div class="mb-6">
                         <form action="{{ route('products.index') }}" method="GET" class="flex flex-col sm:flex-row gap-4">
@@ -76,7 +77,7 @@
                                             @endif
                                         </td>
                                         <td class="border border-gray-300 px-4 py-2 font-medium">{{ $product->name }}</td>
-                                        <td class="border border-gray-300 px-4 py-2">{{ Str::limit($product->description, 50) }}</td>
+                                        <td class="border border-gray-300 px-4 py-2">{!! Str::limit($product->description, 50) !!}</td>
                                         <td class="border border-gray-300 px-4 py-2">Rp {{ number_format($product->price, 0, ',', '.') }}</td>
                                         <td class="border border-gray-300 px-4 py-2">{{ $product->stock }}</td>
                                         <td class="border border-gray-300 px-4 py-2">{{ $product->category->name }}</td>

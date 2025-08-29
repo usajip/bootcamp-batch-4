@@ -32,7 +32,22 @@ class ProductCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:30|unique:product_categories,name',
+            // 'name' => ['required', 'string', 'max:2', 'unique:product_categories,name'],
+        ]);
+
+        // $name_check = ProductCategory::where('name', $request->name)->exists(); // true/false
+
+        // if ($name_check) {
+        //     return redirect()->back()->withErrors(['name' => 'Category name already exists.']);
+        // }
+
+        $category = new ProductCategory;
+        $category->name = $request->name;
+        $category->save();
+
+        return redirect()->back()->with('success', 'Product category created successfully.');
     }
 
     /**

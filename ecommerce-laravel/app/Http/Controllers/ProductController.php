@@ -45,7 +45,30 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'description' => 'nullable|string',
+            'price' => 'required|integer|min:0',
+            'stock' => 'required|integer|min:0',
+            'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg,webp',
+            'category_id' => 'required|exists:product_categories,id',
+        ]);
+
+        $product = new Product;
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->stock = $request->stock;
+        $product->product_category_id = $request->category_id;
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $product->image = $request->file('image')->store('products', 'images');
+        }
+
+        $product->save();
+
+        return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
 
     /**
