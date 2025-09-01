@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
@@ -71,14 +72,43 @@ class ProductCategoryController extends Controller
      */
     public function update(Request $request, ProductCategory $productCategory)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:30|unique:product_categories,name,' . $productCategory->id,
+        ]);
+
+        $productCategory->name = $request->name;
+        $productCategory->save();
+
+        return redirect()->back()->with('success', 'Product category updated successfully.');
     }
+
+    public function updateCategoryById(Request $request, $id)
+    {
+        $productCategory = ProductCategory::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:30|unique:product_categories,name,' . $productCategory->id,
+        ]);
+
+        $productCategory->name = $request->name;
+        $productCategory->save();
+
+        return redirect()->back()->with('success', 'Product category updated successfully.');
+    }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(ProductCategory $productCategory)
     {
-        //
+        if ($productCategory->products()->exists()) {
+            // Product::where('product_category_id', $productCategory->id)->update(['product_category_id' => null]);
+            // Product::where('product_category_id', $productCategory->id)->delete();
+            return redirect()->back()->withErrors(['error' => 'Cannot delete category "' . $productCategory->name . '" with related products.']);
+        }
+
+        $productCategory->delete();
+        return redirect()->back()->with('success', 'Product category deleted successfully.');
     }
 }

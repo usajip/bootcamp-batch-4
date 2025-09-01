@@ -25,7 +25,7 @@
                         <!-- Description -->
                         <div>
                             <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                            <textarea name="description" id="description" rows="4" 
+                            <textarea name="description" id="description" rows="4"
                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">{{ old('description', $product->description) }}</textarea>
                             @error('description')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -37,19 +37,12 @@
                             <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
                             <div class="relative">
                                 <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">Rp</span>
-                                <input type="text" name="price" id="price" value="{{ old('price', number_format($product->price, 0, ',', '.')) }}" 
+                                <input type="number" name="price" id="price" value="{{ old('price', $product->price) }}" 
                                        class="mt-1 block w-full pl-10 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" 
                                        placeholder="0"
                                        required
-                                       oninput="formatRupiah(this)">
+                                       min="0">
                             </div>
-
-                            <script>
-                            function formatRupiah(input) {
-                                let value = input.value.replace(/[^0-9]/g, '');
-                                input.value = new Intl.NumberFormat('id-ID').format(value);
-                            }
-                            </script>
                             @error('price')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -103,7 +96,7 @@
                             </a>
                             <button type="submit" 
                                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                Create Product
+                                Update Product
                             </button>
                         </div>
                     </form>
@@ -112,9 +105,20 @@
         </div>
     </div>
     @push('scripts')
+    <!-- CKEditor CDN (latest secure version) -->
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             console.log('Script loaded for edit form'); // Debugging log
+
+            // Initialize CKEditor for description textarea
+            if (document.getElementById('description')) {
+                CKEDITOR.replace('description', {
+                    toolbar: [
+                        ['Bold', 'Italic', 'Underline', 'Strike']
+                    ]
+                });
+            }
 
             const form = document.getElementById('edit-product-form');
             console.log('Form element:', form); // Debugging log
@@ -138,11 +142,19 @@
                     showError(nameInput, 'Product name is required.');
                 }
 
-                // Validate Description
-                const descriptionInput = document.getElementById('description');
-                if (!descriptionInput.value.trim()) {
-                    isValid = false;
-                    showError(descriptionInput, 'Description is required.');
+                // Validate Description (get CKEditor data)
+                if (CKEDITOR.instances.description) {
+                    var descValue = CKEDITOR.instances.description.getData().replace(/<[^>]*>/g, '').trim();
+                    if (!descValue) {
+                        isValid = false;
+                        showError(document.getElementById('description'), 'Description is required.');
+                    }
+                } else {
+                    const descriptionInput = document.getElementById('description');
+                    if (!descriptionInput.value.trim()) {
+                        isValid = false;
+                        showError(descriptionInput, 'Description is required.');
+                    }
                 }
 
                 // Validate Price

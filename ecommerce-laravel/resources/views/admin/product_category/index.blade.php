@@ -83,24 +83,26 @@
                                         <td class="border border-gray-300 px-4 py-2">Rp {{ number_format(($category->products_sum_price*$category->products_sum_stock ) ?? 0, 0, ',', '.') }}</td>
                                         <td class="border border-gray-300 px-4 py-2">
                                             <div class="flex space-x-2">
-                                                <button onclick="openEditModal({{ $category->id }}, '{{ $category->name }}')" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded text-sm">
+                                                <button onclick="openEditModal({{ $category->id }})" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded text-sm">
                                                     Edit
                                                 </button>
                                                 <!-- Edit Modal -->
-                                                <div id="editCategoryModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+                                                <div id="editCategoryModal{{ $category->id }}" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
                                                     <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
                                                         <div class="mt-3">
                                                             <h3 class="text-lg font-bold text-gray-900 mb-4">Edit Product Category</h3>
-                                                            <form id="editCategoryForm" method="POST">
+                                                            <form action="{{ route('product-categories.update', $category) }}" method="POST">
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <div class="mb-4">
-                                                                    <label for="editName" class="block text-sm font-medium text-gray-700 mb-2">Category Name</label>
-                                                                    <input type="text" id="editName" name="name" required 
-                                                                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                                                    <label for="editName{{ $category->id }}" class="block text-sm font-medium text-gray-700 mb-2">Category Name</label>
+                                                                    <input type="text" id="editName{{ $category->id }}" name="name" 
+                                                                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" 
+                                                                           value="{{ old('name', $category->name) }}"
+                                                                           required>
                                                                 </div>
                                                                 <div class="flex justify-end space-x-2">
-                                                                    <button type="button" onclick="closeEditModal()" 
+                                                                    <button type="button" onclick="closeEditModal({{ $category->id }})" 
                                                                             class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                                                                         Cancel
                                                                     </button>
@@ -113,28 +115,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @push('scripts')
-                                                <script>
-                                                    function openEditModal(categoryId, categoryName) {
-                                                        document.getElementById('editCategoryModal').classList.remove('hidden');
-                                                        document.getElementById('editName').value = categoryName;
-                                                        document.getElementById('editCategoryForm').action = `/product-categories/${categoryId}`;
-                                                    }
-
-                                                    function closeEditModal() {
-                                                        document.getElementById('editCategoryModal').classList.add('hidden');
-                                                    }
-
-                                                    // Close edit modal when clicking outside
-                                                    window.onclick = function(event) {
-                                                        const editModal = document.getElementById('editCategoryModal');
-                                                        if (event.target == editModal) {
-                                                            closeEditModal();
-                                                        }
-                                                    }
-                                                </script>
-                                                @endpush
-                                                <form action="{{ route('product-categories.destroy', $category->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this product?')">
+                                                <form action="{{ route('product-categories.destroy', $category->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this product category: {{ $category->name }}?')">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-sm">
@@ -162,4 +143,23 @@
             </div>
         </div>
     </div>
+@push('scripts')
+<script>
+    function openEditModal(categoryId) {
+        document.getElementById('editCategoryModal' + categoryId).classList.remove('hidden');
+    }
+
+    function closeEditModal(categoryId) {
+        document.getElementById('editCategoryModal' + categoryId).classList.add('hidden');
+    }
+
+    // Close edit modal when clicking outside
+    // window.onclick = function(event) {
+    //     const editModal = document.getElementById('editCategoryModal' + categoryId);
+    //     if (event.target == editModal) {
+    //         closeEditModal(categoryId);
+    //     }
+    // }
+</script>
+@endpush
 </x-app-layout>

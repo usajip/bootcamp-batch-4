@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -100,7 +101,33 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'description' => 'nullable|string',
+            'price' => 'required|integer|min:0',
+            'stock' => 'required|integer|min:0',
+            'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg,webp',
+            'category_id' => 'required|exists:product_categories,id',
+        ]);
+
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->stock = $request->stock;
+        $product->product_category_id = $request->category_id;
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($product->image) {
+                Storage::disk('images')->delete($product->image);
+            }
+            $product->image = $request->file('image')->store('products', 'images');
+        }
+
+        $product->save();
+
+        return redirect()->route('products.index')->with('success', 'Product "' . $product->name . '" updated successfully.');
     }
 
     /**
@@ -108,6 +135,13 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        // Delete the product image if it exists
+        if ($product->image) {
+            Storage::disk('images')->delete($product->image);
+        }
+
+        $product->delete();
+
+        return redirect()->route('products.index')->with('success', 'Product "' . $product->name . '" deleted successfully.');
     }
 }
