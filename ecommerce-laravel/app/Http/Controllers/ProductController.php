@@ -75,9 +75,15 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        $product = Product::with('category')->findOrFail($id);
+        $sessionKey = 'product_clicked_' . $product->id;
+        if (!session()->has($sessionKey)) {
+            $product->increment('clicks');
+            session()->put($sessionKey, true);
+        }
+        return view('products.detail', compact('product'));
     }
 
     /**

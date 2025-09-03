@@ -13,7 +13,7 @@ class DashboardController extends Controller
         $totalProducts = Product::count();
         $productStock = Product::sum('stock');
         $totalCategories = ProductCategory::count();
-        $totalClicks = 12340;
+        $totalClicks = Product::sum('clicks');
 
         $data = [
             [

@@ -7,7 +7,6 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('product.detail') }}">Product Detail</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('cart') }}">Cart</a></li>
                 @auth
                     @if(Auth::user()->role === 'admin')
