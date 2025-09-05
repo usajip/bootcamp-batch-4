@@ -12,5 +12,14 @@
                 <a href="{{ route('cart.add', $product->id) }}" class="btn btn-success">Tambah ke Keranjang</a>
             </div>
         </div>
+        <hr class="mt-5" style="border-color: #b7b7b7;">
+        <h3 class="mt-5">Produk Rekomendasi</h3>
+        <div class="row">
+            @foreach($product_recommendations as $recommended)
+                <div class="col-md-3 mb-4">
+                    <x-product-card :product="$recommended" />
+                </div>
+            @endforeach
+        </div>
     </div>
 </x-template>

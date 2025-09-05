@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">Ecommerce</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -17,8 +17,10 @@
                         <button type="submit" class="nav-link btn btn-link">Logout</button>
                     </form>
                 @else
-                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                    {{-- <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li> --}}
+                    @if (Route::has('register'))
                     <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+                    @endif
                 @endauth
             </ul>
         </div>

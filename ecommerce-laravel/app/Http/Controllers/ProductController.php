@@ -83,7 +83,12 @@ class ProductController extends Controller
             $product->increment('clicks');
             session()->put($sessionKey, true);
         }
-        return view('products.detail', compact('product'));
+        $product_recommendations = Product::where('product_category_id', $product->product_category_id)
+                                        ->where('id', '!=', $product->id)
+                                        ->inRandomOrder()
+                                        ->take(4)
+                                        ->get();
+        return view('products.detail', compact('product', 'product_recommendations'));
     }
 
     /**

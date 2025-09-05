@@ -25,8 +25,7 @@ class HomeController extends Controller
         
         $categories = ProductCategory::all();
 
-        $name = 'John';
-        $age = 18;
-        return view('home', compact('title', 'sub_title', 'products', 'categories', 'name', 'age'));
+        $popular_products = Product::orderBy('clicks', 'desc')->take(4)->get();
+        return view('home', compact('title', 'sub_title', 'products', 'categories', 'popular_products', 'category'));
     }
 }
